@@ -1,7 +1,10 @@
 #include "get_input.h"
+#include "environment.h"
+
+environment env;
 
 static void print_prompt(void){
-    printf("> ");
+    printf(">" );
 }
 
 char* read_input(void){

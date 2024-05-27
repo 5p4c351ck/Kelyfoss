@@ -1,4 +1,6 @@
 #include "get_input.h"
+#include "environment.h"
+
 
 static char* input;
 static char **tokens;
