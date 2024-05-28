@@ -1,10 +1,13 @@
 executable = kelyfoss
-objs = get_input.o main.o
+objs = environment.o get_input.o main.o 
 
 all: $(executable)
 
 $(executable) : $(objs)
 	gcc $(objs) -o $(executable)
+
+environment.o : environment.c
+	gcc -c environment.c -o environment.o
 
 get_input.o : get_input.c
 	gcc -c get_input.c -o get_input.o
@@ -15,4 +18,4 @@ main.o : main.c
 
 
 clean:
-	rm *.o
+	rm *.o $(executable)
