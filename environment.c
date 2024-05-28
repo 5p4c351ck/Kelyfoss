@@ -4,7 +4,7 @@
 
 #include "environment.h"
 
-static int set_env_var(char* str, env_vars *variables);
+static int set_env_var(const char* str, env_vars *variables);
 static int resize_var_buffer(env_vars *variables);
 
 
@@ -37,7 +37,7 @@ void destroy_environment(environment* env){
 }
 
 
-static int set_env_var(char* str, env_vars *variables){
+static int set_env_var(const char* str, env_vars *variables){
         if(variables){
                 for(unsigned int i = 0; i < variables->size; i++){
                         char *var = variables->buffer[i];
@@ -45,7 +45,7 @@ static int set_env_var(char* str, env_vars *variables){
                         if(eq_sign){
                                 size_t len = eq_sign - var;
                                 if(len == strlen(str) && (!strncmp(var, str, len))){
-                                                variables->buffer[i] = str;
+                                                variables->buffer[i] = strdup(str);
                                                 return 0;
                                 }
                         }         
@@ -54,11 +54,11 @@ static int set_env_var(char* str, env_vars *variables){
                         if(resize_var_buffer(variables) == -1){
                                 return -1;
                         }
-                        variables->buffer[variables->size++] = str;
+                        variables->buffer[variables->size++] = strdup(str);
                         return 0;
                 }
                 else{
-                        variables->buffer[variables->size++] = str;
+                        variables->buffer[variables->size++] = strdup(str);
                         return 0;  
                 }
         }
