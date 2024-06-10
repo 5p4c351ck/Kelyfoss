@@ -13,8 +13,9 @@ int main(void){
     while(1){
         if(input = read_input()){
             if(tokens = tokenize_input(input)){
-                
+            		free(tokens);   
             }
+		free(input);   
         }
     }
 
